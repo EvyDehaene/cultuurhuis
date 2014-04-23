@@ -8,8 +8,21 @@ public class Klant {
 	private String huisNr;
 	private String postcode;
 	private String gemeente;
-	private String gebruikersnaam;
+	private String gebruikersNaam;
 	private String paswoord;
+	
+	public Klant(int klantNr, String voornaam, String familienaam, String straat, String huisNr, String postcode,
+			String gemeente, String gebruikersNaam, String paswoord) {
+		setKlantNr(klantNr);
+		setVoornaam(voornaam);
+		setFamilienaam(familienaam);
+		setStraat(straat);
+		setHuisNr(huisNr);
+		setGemeente(gemeente);
+		setPostcode(postcode);
+		setGebruikersNaam(gebruikersNaam);
+		setPaswoord(paswoord);
+	}
 	
 	public int getKlantNr() {
 		return klantNr;
@@ -53,11 +66,11 @@ public class Klant {
 	public void setGemeente(String gemeente) {
 		this.gemeente = gemeente;
 	}
-	public String getGebruikersnaam() {
-		return gebruikersnaam;
+	public String getGebruikersNaam() {
+		return gebruikersNaam;
 	}
-	public void setGebruikersnaam(String gebruikersnaam) {
-		this.gebruikersnaam = gebruikersnaam;
+	public void setGebruikersNaam(String gebruikersNaam) {
+		this.gebruikersNaam = gebruikersNaam;
 	}
 	public String getPaswoord() {
 		return paswoord;

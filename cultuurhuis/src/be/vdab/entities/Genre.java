@@ -4,6 +4,11 @@ public class Genre {
 	private int genreNr;
 	private String naam;
 	
+	public Genre (int genreNr, String naam) {
+		setGenreNr(genreNr);
+		setNaam(naam);
+	}
+	
 	public int getGenreNr() {
 		return genreNr;
 	}

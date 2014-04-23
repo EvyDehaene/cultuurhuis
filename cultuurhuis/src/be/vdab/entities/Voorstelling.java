@@ -11,6 +11,15 @@ public class Voorstelling {
 	private BigDecimal prijs;
 	private int vrijePlaatsen;
 	
+	public Voorstelling (int voorstellingsNr, String titel, Date datum, int genreNr, BigDecimal prijs, int vrijePlaatsen) {
+		setVoorstellingsNr(voorstellingsNr);
+		setTitel(titel);
+		setDatum(datum);
+		setGenreNr(genreNr);
+		setPrijs(prijs);
+		setVrijePlaatsen(vrijePlaatsen);
+	}
+	
 	public int getVoorstellingsNr() {
 		return voorstellingsNr;
 	}
