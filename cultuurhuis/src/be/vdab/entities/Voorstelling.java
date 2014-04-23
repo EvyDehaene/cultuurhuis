@@ -6,12 +6,13 @@ import java.util.Date;
 public class Voorstelling {
 	private int voorstellingsNr;
 	private String titel;
+	private String uitvoerders;
 	private Date datum;
 	private int genreNr;
 	private BigDecimal prijs;
 	private int vrijePlaatsen;
 	
-	public Voorstelling (int voorstellingsNr, String titel, Date datum, int genreNr, BigDecimal prijs, int vrijePlaatsen) {
+	public Voorstelling (int voorstellingsNr, String titel, String uitvoerders, Date datum, int genreNr, BigDecimal prijs, int vrijePlaatsen) {
 		setVoorstellingsNr(voorstellingsNr);
 		setTitel(titel);
 		setDatum(datum);
@@ -31,6 +32,13 @@ public class Voorstelling {
 	}
 	public void setTitel(String titel) {
 		this.titel = titel;
+	}
+	public String getUitvoerders() {
+		return uitvoerders;
+	}
+
+	public void setUitvoerders(String uitvoerders) {
+		this.uitvoerders = uitvoerders;
 	}
 	public Date getDatum() {
 		return datum;
