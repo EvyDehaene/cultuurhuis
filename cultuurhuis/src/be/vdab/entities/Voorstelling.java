@@ -15,6 +15,7 @@ public class Voorstelling {
 	public Voorstelling (int voorstellingsNr, String titel, String uitvoerders, Date datum, int genreNr, BigDecimal prijs, int vrijePlaatsen) {
 		setVoorstellingsNr(voorstellingsNr);
 		setTitel(titel);
+		setUitvoerders(uitvoerders);
 		setDatum(datum);
 		setGenreNr(genreNr);
 		setPrijs(prijs);

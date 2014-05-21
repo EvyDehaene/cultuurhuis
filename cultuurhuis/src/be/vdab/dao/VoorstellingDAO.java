@@ -12,26 +12,12 @@ import java.util.List;
 import be.vdab.entities.Voorstelling;
 
 public class VoorstellingDAO  extends AbstractDAO {
-	private static final String FIND_ALL_SQL = 
-			"select VoorstellingsNr, Titel, Uitvoerders, Datum, GenreNr, Prijs, VrijePlaatsen from voorstellingen";
+	
 	private static final String READ_SQL = "select VoorstellingsNr, Titel, Uitvoerders, Datum, GenreNr, Prijs, VrijePlaatsen"
 			+ " from voorstellingen where GenreNr = ?";
 	private static final String CREATE_SQL = "insert into voorstellingen (Titel, Uitvoerders, Datum, GenreNr, VrijePlaatsen)"
 			+ " values (?, ?, ?, ?, ?)";
 	
-	public Iterable<Voorstelling> findAll() {
-		try (Connection connection = getConnection();
-				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery(FIND_ALL_SQL);) {
-			List<Voorstelling> voorstellingen = new ArrayList<>();
-			while (resultSet.next()) {
-				voorstellingen.add(resultSetRijNaarVoorstelling(resultSet));
-			}
-			return voorstellingen;
-		} catch (SQLException ex) {
-			throw new DAOException("Kan voorstellingen niet lezen uit de database", ex);
-		}
-	}
 	
 	private Voorstelling resultSetRijNaarVoorstelling (ResultSet resultSet) throws SQLException {
 		return new Voorstelling(resultSet.getInt("VoorstellingsNr"), resultSet.getString("Titel"), resultSet.getString("Uitvoerders"),
