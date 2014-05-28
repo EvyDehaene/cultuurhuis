@@ -4,10 +4,10 @@ body {
 }
 
 h1 {
-	color:blue;
+	color:midnightBlue;
 }
 h2 {
-	color:blue;
+	color:midnightBlue;
 }
 
 table.zebra tr:nth-child(even) {
@@ -15,4 +15,17 @@ table.zebra tr:nth-child(even) {
 }
 tr:nth-child(odd) {
 	background-color:#c6d1dd;
+}
+
+dl {
+	text-align:left;
+}
+dd {
+	padding-bottom:1em;
+	text-align:left;
+	text-indent:0;
+	font-weight:bold;
+}
+div.fout {
+	color:red;
 }
