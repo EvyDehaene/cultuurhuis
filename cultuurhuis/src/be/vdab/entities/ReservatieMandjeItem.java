@@ -9,6 +9,7 @@ public class ReservatieMandjeItem {
 	private String titel;
 	private String uitvoerders;
 	private BigDecimal prijs;
+	private int vrijePlaatsen;
 	private int plaatsen;
 	
 	public ReservatieMandjeItem(int aantalPlaatsen, Voorstelling voorstelling){
@@ -19,6 +20,7 @@ public class ReservatieMandjeItem {
 		setUitvoerders(voorstelling.getUitvoerders());
 		setPrijs(voorstelling.getPrijs());
 		setPlaatsen(aantalPlaatsen);
+		setVrijePlaatsen(voorstelling.getVrijePlaatsen());
 	}
 	
 	public int getNummer() {
@@ -67,6 +69,15 @@ public class ReservatieMandjeItem {
 
 	public void setPlaatsen(int plaatsen) {
 		this.plaatsen = plaatsen;
+	}
+	
+	
+	public int getVrijePlaatsen() {
+		return vrijePlaatsen;
+	}
+
+	public void setVrijePlaatsen(int vrijePlaatsen) {
+		this.vrijePlaatsen = vrijePlaatsen;
 	}
 
 	@Override

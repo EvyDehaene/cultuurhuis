@@ -27,12 +27,22 @@ public class VoorstellingServlet extends HttpServlet {
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		@SuppressWarnings("unchecked")
+		Map<Integer,Integer> mandje = (Map<Integer,Integer>)request.getSession().getAttribute(MANDJE);
 		
 		int nummer = 0;
 		try {
 			nummer = Integer.parseInt(request.getParameter("nummer")); // nummer van de voorstelling                                                                              
 			Voorstelling voorstelling = voorstellingDAO.findByNumber(nummer );
 			request.setAttribute("voorstelling", voorstelling);
+			if (mandje!=null){
+				for (Map.Entry<Integer, Integer> entry : mandje.entrySet()){
+					if (nummer==entry.getKey()){
+						int plaatsen=entry.getValue();
+						request.setAttribute("gereserveerdePlaatsen", plaatsen);
+					}
+				}
+			}
 
 		} catch (NumberFormatException ex) {
 			// we doen niets, de pagina blijft staan
@@ -45,6 +55,7 @@ public class VoorstellingServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Voorstelling voorstelling = null;
+		
 		try {
 			int nummer = Integer.parseInt(request.getParameter("nummer"));
 			voorstelling = voorstellingDAO.findByNumber(nummer);
@@ -74,6 +85,13 @@ public class VoorstellingServlet extends HttpServlet {
 				if(mandje==null){
 					mandje = new HashMap<Integer,Integer>();
 					request.getSession().setAttribute(MANDJE, mandje);
+					
+				} else if (mandje!=null){
+					for (Map.Entry<Integer, Integer> entry : mandje.entrySet()){
+						if (voorstelling.getVoorstellingsNr()==entry.getKey()){
+							entry.setValue(entry.getValue()+plaatsenTeReserveren);
+						}
+					}
 				}
 				mandje.put(voorstelling.getVoorstellingsNr(), plaatsenTeReserveren);
 				response.sendRedirect(request.getContextPath()+SUCCESSFUL_VIEW/*+voorstelling.getGenreNr()*/);

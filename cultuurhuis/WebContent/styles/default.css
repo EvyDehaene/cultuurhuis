@@ -11,21 +11,25 @@ h2 {
 }
 
 table.zebra tr:nth-child(even) {
-	background-color:#efefef;
-}
-tr:nth-child(odd) {
 	background-color:#c6d1dd;
 }
-
-dl {
-	text-align:left;
+tr:nth-child(odd) {
+	background-color:#ffffe0;
 }
+th {
+	color:#00008b;
+	background-color:#f0e68c;
+}
+dd, dt {
+  margin-left: 0;
+  }
 dd {
-	padding-bottom:1em;
-	text-align:left;
-	text-indent:0;
-	font-weight:bold;
+  font-weight: bold;
+/*   margin-top: 0.5em; */
+} 
+dt {
+	margin-top:1em;
 }
-div.fout {
+.fout {
 	color:red;
 }

@@ -31,8 +31,6 @@ public class ReservatieMandjeServlet extends HttpServlet {
 			@SuppressWarnings("unchecked")
 			Map<Integer, Integer> mandje =  (HashMap<Integer, Integer>) session.getAttribute("mandje"); 
 			if (mandje != null) { 
-				
-				
 				List<ReservatieMandjeItem> reservaties = new ArrayList<>();
 				for (Map.Entry<Integer, Integer> entry : mandje.entrySet()) { 
 					int nummer = entry.getKey();
@@ -44,7 +42,6 @@ public class ReservatieMandjeServlet extends HttpServlet {
 					totaal = totaal + tussenResultaat;
 
 				}
-				
 				request.setAttribute("reservaties", reservaties);
 				request.setAttribute("totaalTeBetalen", totaal);
 			}
@@ -64,7 +61,7 @@ public class ReservatieMandjeServlet extends HttpServlet {
 			Map<Integer, Integer> mandje =  (HashMap<Integer, Integer>) session.getAttribute("mandje"); 
 			
 			List<ReservatieMandjeItem> reservaties = new ArrayList<>();
-			if (mandje != null) { 
+			if (mandje != null) {
 				for (Map.Entry<Integer, Integer> entry : mandje.entrySet()) { 
 					int nummer = entry.getKey();
 					int plaatsen = entry.getValue();
@@ -72,22 +69,28 @@ public class ReservatieMandjeServlet extends HttpServlet {
 					reservaties.add(reservatie);
 					double tussenResultaat = plaatsen * voorstellingDAO.findByNumber(nummer).getPrijs().doubleValue();
 					totaal = totaal + tussenResultaat;
+					request.setAttribute("reservaties", reservaties);
+					request.setAttribute("totaalTeBetalen", totaal);
 				}
-			}
-			if (!request.getParameter("verwijderNr").isEmpty()){
-				int nr=Integer.parseInt(request.getParameter("verwijderNr"));
-				for (ReservatieMandjeItem reservatie : reservaties){
-					if (reservatie.getNummer()==nr){
-						reservaties.remove(reservatie);
+				if (!request.getParameter("verwijderNr").isEmpty()){
+					int nr=Integer.parseInt(request.getParameter("verwijderNr"));
+					for (ReservatieMandjeItem reservatie : reservaties){
+						if (reservatie.getNummer()==nr){
+							reservaties.remove(reservatie);
+							double tussenResultaat = reservatie.getPlaatsen() * voorstellingDAO.findByNumber(reservatie.getNummer()).getPrijs().doubleValue();
+							totaal = totaal - tussenResultaat;
+							mandje.remove(nr);
+						}
 					}
+					request.setAttribute("reservaties", reservaties);
+					request.setAttribute("totaalTeBetalen", totaal);
 				}
-			}
+				
+			}	
 			
-			request.setAttribute("reservaties", reservaties);
-			request.setAttribute("totaalTeBetalen", totaal);
 		  }
 		  RequestDispatcher dispatcher = request.getRequestDispatcher(VIEW);
-			dispatcher.forward(request, response);
+		  dispatcher.forward(request, response);
 		  
 		} else {
 			

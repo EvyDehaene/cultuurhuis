@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}"/>
+<fmt:setLocale value="nl_BE"/>
 <!doctype html>
 <html lang="nl">
 	<head>
@@ -10,10 +11,10 @@
 	</head>
 	<body>
 		<h1>Het Cultuurhuis:reservatiemandje <img src="${contextPath}/images/mandje.png"/></h1>
-		<c:url value="/welkom" var="welkomURL"/>
-		<a href="${welkomURL}">Voorstellingen</a>
-		<c:url value="/bevestiging" var="bevestigURL"/>
-		<a href="${bevestigURL}">Bevestig reservatie</a>
+		<nav>
+			<c:url value="/welkom" var="welkomURL"/><a href="${welkomURL}">Voorstellingen</a>
+			<c:url value="/bevestiging" var="bevestigURL"/><a href="${bevestigURL}">Bevestig reservatie</a>
+		</nav>
 		<form method="post" action="${url}">
 			<table>
 				<thead>
@@ -32,7 +33,7 @@
 							<td><fmt:formatDate value="${reservatie.datum}" type="both" dateStyle="short" timeStyle="short"/></td>
 							<td>${reservatie.titel}</td>
 							<td>${reservatie.uitvoerders}</td>
-							<td>&euro;${reservatie.prijs}</td>
+							<td>&euro;<fmt:formatNumber value="${reservatie.prijs}" type="currency" currencySymbol=""/></td>
 							<td>${reservatie.plaatsen}</td>
 							<td style ="text-align:center;"><input type="checkbox" name="verwijderNr" value="${reservatie.nummer}"/></td>
 						</tr>

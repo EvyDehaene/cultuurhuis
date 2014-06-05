@@ -1,7 +1,8 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8" session = "false" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}"/>
+<fmt:setLocale value="nl_BE"/>
 <!doctype html>
 <html lang="nl">
 	<head>
@@ -11,7 +12,7 @@
 	<body>
 		<c:import url="/WEB-INF/JSP/welkom.jsp"/>
 		<h2>${naam} voorstellingen</h2>
-		<table>
+		<table class="zebra">
 			<thead>
 				<tr>
 					<th>Datum</th>
@@ -28,7 +29,7 @@
 						<td><fmt:formatDate value="${voorstelling.datum}" type="both" dateStyle="short" timeStyle="short"/></td>
 						<td>${voorstelling.titel}</td>
 						<td>${voorstelling.uitvoerders}</td>
-						<td>&euro;${voorstelling.prijs}</td>
+						<td>&euro;<fmt:formatNumber value="${voorstelling.prijs}" type="currency" currencySymbol=""/></td>
 						<td>${voorstelling.vrijePlaatsen}</td>
 						<td> 
 							<c:if test="${voorstelling.vrijePlaatsen>0}">
