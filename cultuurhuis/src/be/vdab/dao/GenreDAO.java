@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import be.vdab.entities.Genre;
 
 public class GenreDAO extends AbstractDAO {
@@ -16,7 +17,7 @@ public class GenreDAO extends AbstractDAO {
 		try (Connection connection = getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(FIND_ALL_SQL);) {
-			List<Genre> genres=new ArrayList();
+			List<Genre> genres=new ArrayList<>();
 			while (resultSet.next()) {
 				genres.add(resultSetRijNaarGenre(resultSet));
 			}

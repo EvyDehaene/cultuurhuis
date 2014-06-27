@@ -60,8 +60,6 @@ public class OverzichtServlet extends HttpServlet {
 					}
 				}
 			}
-			
-			//request.setAttribute("klant", sessieKlant);
 			session.removeAttribute("klant");
 			session.removeAttribute("mandje");
 			RequestDispatcher dispatcher = request.getRequestDispatcher(VIEW);

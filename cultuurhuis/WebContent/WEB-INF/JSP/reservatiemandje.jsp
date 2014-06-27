@@ -11,10 +11,14 @@
 	</head>
 	<body>
 		<h1>Het Cultuurhuis:reservatiemandje <img src="${contextPath}/images/mandje.png"/></h1>
+		
 		<nav>
+		<p>
 			<c:url value="/welkom" var="welkomURL"/><a href="${welkomURL}">Voorstellingen</a>
-			<c:url value="/bevestiging" var="bevestigURL"/><a href="${bevestigURL}">Bevestig reservatie</a>
+			<c:url value="/bevestiging" var="bevestigURL"/><a href="${bevestigURL}">Bevestiging reservatie</a>
+		</p>
 		</nav>
+		
 		<form method="post" action="${url}">
 			<table>
 				<thead>
@@ -41,7 +45,15 @@
 				</tbody>
 			</table>
 		</form>
-		Te betalen:${totaalTeBetalen}
-		
+		<c:if test="${not empty totaalTeBetalen}">
+			<p>Te betalen:${totaalTeBetalen}</p>
+		</c:if>
+		<c:if test="${not empty fouten}">
+		<p>
+			<c:forEach var="fout" items="${fouten}">
+				<div class="fout">${fout.value}</div>
+			</c:forEach>
+		</p>
+		</c:if>
 	</body>
 </html>

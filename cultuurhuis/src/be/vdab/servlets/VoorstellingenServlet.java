@@ -32,16 +32,11 @@ public class VoorstellingenServlet extends HttpServlet {
 		int nummer = Integer.parseInt(request.getParameter("nummer"));
 		String naam = request.getParameter("naam");
 		List<Voorstelling> voorstellingen= (List<Voorstelling>) voorstellingDAO.findByGenre(nummer);//new ArrayList<>();
-		
-		
-		//voorstellingen.addAll(voorstellingDAO.findByGenre(nummer));
 		request.setAttribute("naam", naam);
 		request.setAttribute("nummer", nummer);
 		request.setAttribute("genres", genreDAO.findAll());
 		request.setAttribute("voorstellingen", voorstellingen);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(VIEW);
 		dispatcher.forward(request, response);
-		
 	}
-
 }

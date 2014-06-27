@@ -13,7 +13,7 @@
 			<c:url value="/reservatiemandje" var="reservatiemandjeURL"/>
 			<a href="${reservatiemandjeURL}">Reservatiemandje</a>
 			<c:url value="/bevestiging" var="bevestigURL"/>
-			<a href="${bevestigURL}">Bevestig reservatie</a>
+			<a href="${bevestigURL}">Bevestiging reservatie</a>
 		  </c:if>
 		</nav>
 		<h2>Genres</h2>

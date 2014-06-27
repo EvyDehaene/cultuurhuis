@@ -24,7 +24,7 @@
 				<dt>Datum:</dt>
 				<dd><fmt:formatDate value="${voorstelling.datum}" type="both" dateStyle="short" timeStyle="short"/></dd>
 				<dt>Prijs:</dt>
-				<dd>&euro;<fmt:formatNumber value="${voorstelling.prijs}" type="currency" currencySymbol=""/></td></dd>
+				<dd>&euro;<fmt:formatNumber value="${voorstelling.prijs}" type="currency" currencySymbol=""/></dd>
 				<dt>Vrije plaatsen:</dt>
 				<dd>${voorstelling.vrijePlaatsen}</dd>
 				<dt>Plaatsen:</dt>

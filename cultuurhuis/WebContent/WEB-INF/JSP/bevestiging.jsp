@@ -17,6 +17,7 @@
 		<form method="post" action="${url }" id="bestaandegebruikerform">
 			<label>Gebruikersnaam:<br><input type = "text" name="gebruikersnaam" autofocus/></label><br>
 			<label>Paswoord:<br><input type="password" name="paswoord"/></label><br>
+			<p>
 			<c:choose>
 				<c:when test="${not empty klant}">
 					<input type="submit" value="Zoek me op" id="zoekknop" disabled/>
@@ -25,30 +26,35 @@
 					<input type="submit" value="Zoek me op" id="zoekknop"/>
 				</c:otherwise>
 			</c:choose>
-<!-- 			<input type="submit" value="Zoek me op" id="zoekknop"/> -->
+			</p>
 		</form>
+		<p>
 		<c:choose>
+		
 				<c:when test="${not empty klant}">
-					<a href="${contextPath}/nieuweklant"><button type="button" disabled>Ik ben nieuw</button></a>
+					<input type="submit" value="Ik ben nieuw" id="nieuwknop" disabled/>
 				</c:when>
 				<c:otherwise>
 					<a href="${contextPath}/nieuweklant"><button type="button">Ik ben nieuw</button></a>
 				</c:otherwise>
-			</c:choose>
-<!-- 		<a href="/nieuweklant"><button type="button">Ik ben nieuw</button></a> -->
+		
+		</c:choose>
+		</p>
+		
 		<c:if test="${not empty klant}">
-			<br>${klant.voornaam} ${klant.familienaam} ${klant.straat} ${klant.huisNr} ${klant.postcode} ${klant.gemeente}
+			<p class="bold">${klant.voornaam} ${klant.familienaam} ${klant.straat} ${klant.huisNr} ${klant.postcode} ${klant.gemeente}</p>
 		</c:if>
 		<h2>Stap 2:Bevestigen</h2>
+		<p>
 			<c:choose>
 				<c:when test="${not empty klant}">
 					<a href="${contextPath}/overzicht"><button type="button">Bevestigen</button></a>
 				</c:when>
 				<c:otherwise>
-					<a href="${contextPath}/overzicht"><button type="button" disabled>Bevestigen</button></a>
+					<input type="submit" value="Bevestigen" id="bevestigknop" disabled/>
 				</c:otherwise>
 			</c:choose>
-<!-- 		<button type="button">Bevestigen</button> -->
+			</p>
 			<c:if test="${not empty fouten}">
 				<ul class="fout">
 					<c:forEach var="fout" items="${fouten}">

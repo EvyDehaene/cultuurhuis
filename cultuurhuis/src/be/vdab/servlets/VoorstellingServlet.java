@@ -29,7 +29,6 @@ public class VoorstellingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		@SuppressWarnings("unchecked")
 		Map<Integer,Integer> mandje = (Map<Integer,Integer>)request.getSession().getAttribute(MANDJE);
-		
 		int nummer = 0;
 		try {
 			nummer = Integer.parseInt(request.getParameter("nummer")); // nummer van de voorstelling                                                                              
@@ -43,11 +42,8 @@ public class VoorstellingServlet extends HttpServlet {
 					}
 				}
 			}
-
 		} catch (NumberFormatException ex) {
 			// we doen niets, de pagina blijft staan
-			// in database noteren wie aan't foefelen is£.
-			// ip adres blokkeren bij teveel gefoeter.
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(VIEW);
 		dispatcher.forward(request, response);
@@ -55,45 +51,37 @@ public class VoorstellingServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Voorstelling voorstelling = null;
-		
 		try {
 			int nummer = Integer.parseInt(request.getParameter("nummer"));
 			voorstelling = voorstellingDAO.findByNumber(nummer);
 		} catch (NumberFormatException ex) {
-			// we doen niets?-> de pagina blijft staan
-			// of returnen een error
-			// in database noteren wie aan't foefelen is£.
-			// ip adres blokkeren bij teveel gefoeter.
-			response.sendError(412);// niet voldaan aan de vooraf gestelde voorwaarde (parameter moet integer zijn)
-			return;
+			// we doen niets-> de pagina blijft staan
 		}
 		Map<String, String> fouten = new HashMap<>();
 		if (!request.getParameter("plaatsen").isEmpty()) {
 			int plaatsenTeReserveren = 0;
 			try {
 				plaatsenTeReserveren = Integer.parseInt(request.getParameter("plaatsen"));
-				if (plaatsenTeReserveren>voorstelling.getVrijePlaatsen()) {
+				if (plaatsenTeReserveren>voorstelling.getVrijePlaatsen()|| plaatsenTeReserveren < 1) {
 					fouten.put("plaatsen","Tik een getal tussen 1 en "+voorstelling.getVrijePlaatsen());
 				}
 			} catch (Exception ex) {
 				fouten.put("plaatsen", "Tik een getal");
 			}
-
 			if (fouten.isEmpty()) {
 				@SuppressWarnings("unchecked")
 				Map<Integer,Integer> mandje = (Map<Integer,Integer>)request.getSession().getAttribute(MANDJE);
 				if(mandje==null){
 					mandje = new HashMap<Integer,Integer>();
-					request.getSession().setAttribute(MANDJE, mandje);
-					
 				} else if (mandje!=null){
 					for (Map.Entry<Integer, Integer> entry : mandje.entrySet()){
 						if (voorstelling.getVoorstellingsNr()==entry.getKey()){
-							entry.setValue(entry.getValue()+plaatsenTeReserveren);
-						}
+							plaatsenTeReserveren = entry.getValue()+plaatsenTeReserveren;
+						} 
 					}
 				}
 				mandje.put(voorstelling.getVoorstellingsNr(), plaatsenTeReserveren);
+				request.getSession().setAttribute(MANDJE, mandje);
 				response.sendRedirect(request.getContextPath()+SUCCESSFUL_VIEW/*+voorstelling.getGenreNr()*/);
 			} else {
 				request.setAttribute("fouten", fouten);

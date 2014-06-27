@@ -42,7 +42,12 @@ public class BevestigingServlet extends HttpServlet {
 		}
 		Klant klant = klantDAO.getBestaandeKlant(gebruikersnaam, paswoord);
 		if (klant==null){
-			fouten.put("klant", "Verkeerde gebruikersnaam of paswoord");
+			if (fouten.containsKey("paswoord")||fouten.containsKey("gebruikersnaam")){
+				//foutmelding(en) van paswoord en/of van gebruikersnaam zitten al in lijst
+			} else {
+				fouten.put("klant", "Verkeerde gebruikersnaam of paswoord");
+			}
+			
 		}
 		if (fouten.isEmpty()) {
 			request.setAttribute("klant", klant);

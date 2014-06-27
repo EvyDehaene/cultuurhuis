@@ -37,9 +37,5 @@ public class WelkomServlet extends HttpServlet {
 		request.setAttribute("genres", genreDAO.findAll());
 		RequestDispatcher dispatcher = request.getRequestDispatcher(VIEW);
 		dispatcher.forward(request, response);
-		
 	}
-
-	
-
 }
